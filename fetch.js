@@ -6,7 +6,6 @@ export const getArtsApi = () => {
   return axios
     .get(baseURL+'arts.json')
     .then((res) => {
-      // console.log("res.data", res.data);
       return res;
     })
     .catch((err) => {

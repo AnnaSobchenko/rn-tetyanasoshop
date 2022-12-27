@@ -13,12 +13,16 @@ const artsSlice = createSlice({
     // getArts
     [getArts.pending](state) {
       state.error = null;
+      state.isLoading = true;
     },
     [getArts.fulfilled](state, { payload }) {
-      state.arts = [...payload.data];
+      state.arts = payload.data;
+      state.isLoading = false;
+      state.error = null;
     },
     [getArts.rejected](state, { payload }) {
       state.error = payload;
+      state.isLoading = false;
     },
   },
 });

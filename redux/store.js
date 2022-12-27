@@ -10,26 +10,23 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+// import storage from "redux-persist/lib/storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import artsReducer from "./arts/artsSlice";
-
 
 const artsPersistConfig = {
   key: "arts",
-  storage,
-//   whitelist: [],
+  storage: AsyncStorage,
+  //   whitelist: [],
 };
 
-const artsPersistedReducer = persistReducer(
-    artsPersistConfig,
-    artsReducer
-);
+const artsPersistedReducer = persistReducer(artsPersistConfig, artsReducer);
 
 const store = configureStore({
-  reducer: {    
+  reducer: {
     arts: artsPersistedReducer,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

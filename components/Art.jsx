@@ -5,7 +5,7 @@ import { getArts } from "../redux/arts/artsOperations";
 import { useEffect } from "react";
 
 export default function Art() {
-  const arts=useSelector(getAllArts)
+  const arts = useSelector(getAllArts);
 
   const dispatch = useDispatch();
 
@@ -14,13 +14,18 @@ export default function Art() {
   }, []);
 
   return (
-   Boolean(arts.length)&& <View style={styles.container}>
-      <Image
-        source={require("../assets/arts/lorem-ipsum-001.jpg")}
-        style={styles.image}
-      />
-      <Text style={styles.text}>{arts[0].describe}</Text>
-    </View>
+    Boolean(arts.length) && (
+      <View style={styles.container}>
+        <Image
+          source={require("../assets/arts/lorem-ipsum-001.jpg")}
+          style={styles.image}
+        />
+        <View style={styles.text_container}>
+          <Text style={styles.text}>{arts[0].title}</Text>
+          <Text style={styles.text}>Price {arts[0].price}$</Text>
+        </View>
+      </View>
+    )
   );
 }
 
@@ -33,11 +38,11 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
   },
+  text_container: { width: "50%" },
   text: {
     color: "#141311",
     padding: 5,
     fontSize: 18,
-    width:"50%"
   },
   image: {
     width: "35%",
